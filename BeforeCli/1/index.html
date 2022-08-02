@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue In 8</title>
+    <style type="text/css">
+      .red {
+        border-color: red;
+        border-width: 3px;
+        border-radius: 0px;
+      }
+
+      .green {
+        border-color: rgb(11, 178, 47);
+        border-radius: 5px;
+        border-width: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- main div -->
+    <div id="app">
+      <!-- v-if -->
+      <div v-if="count == 1">Vue first is running</div>
+      <div v-else-if="count == 2">Vue second is running</div>
+      <div v-else>Vue is running</div>
+      <!-- v-model is for watching input values -->
+      <input type="text" v-model="count" />
+      <h1>{{count}}</h1>
+      <!-- v-bind is for binding attributes together -->
+      <section>
+        <p v-text="email.length"></p>
+        <input
+          type="text"
+          v-model="email"
+          :class="[email.length > 3 ? 'green' : 'red']"
+        />
+        <button onclick="alert('Clicked!')" v-bind:disabled="email.length < 4">
+          Confirm
+        </button>
+      </section>
+      <hr />
+      <!-- v-html converts html tags to normal text -->
+      <div>
+        <p v-html="html"></p>
+        <input v-model="html" />
+      </div>
+
+      <!-- Looping through arrays -->
+      <ul>
+        <li v-for="anything in cars">{{anything}}</li>
+      </ul>
+
+      <ul>
+        <li v-for="anything in carsObject">{{anything.name}}</li>
+      </ul>
+      <!-- Add item to the list -->
+      <input v-on:keyup.enter="insertCar" v-model="newCar" />
+      <button @click="insertCar">Insert</button>
+      <ul>
+        <li v-for="anything in carsObject">{{anything.name}}</li>
+      </ul>
+
+      <!-- END REGION -->
+      <hr />
+    </div>
+
+    <script src="./vue.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

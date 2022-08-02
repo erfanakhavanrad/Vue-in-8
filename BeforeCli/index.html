@@ -1,0 +1,56 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue In 8</title>
+    <style type="text/css">
+      .red {
+        border-color: red;
+        border-width: 3px;
+        border-radius: 0px;
+      }
+
+      .green {
+        border-color: rgb(11, 178, 47);
+        border-radius: 5px;
+        border-width: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- main div -->
+    <div id="app">
+      <!-- START REGION -->
+
+      <!-- Add item to the list -->
+      <!-- <form action="">
+        <input v-on:keyup.enter="insertCar" v-model="newCar" />
+        <button @click.prevent.stop="insertCar">Insert</button>
+      </form>
+      <ul>
+        <!-- Using filters -->
+      <!-- <li v-for="anything in carsObject">
+          {{anything.name | capitalize | myCar}}
+        </li>
+      </ul> -->
+      <hr />
+      <!-- Computed -->
+      <!-- {{carName}} -->
+      <!-- <input v-on:keyup.enter="insertCar" v-model="newCar" />
+      <button @click.prevent.stop="insertCar">Insert</button>
+      <ul>
+        <li v-for="anything in carsObject">{{anything.name }}</li>
+      </ul> -->
+      <!-- Components -->
+      <hr />
+      <input v-on:keyup.enter="insertCar" v-model="newCar" />
+      <button @click.prevent.stop="insertCar">Insert</button>
+      <caristomponent :passingobject="carsobject" />
+      <!-- END REGION -->
+    </div>
+
+    <script src="./vue.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
