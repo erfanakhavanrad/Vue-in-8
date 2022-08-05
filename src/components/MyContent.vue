@@ -1,5 +1,58 @@
 <template>
-    <div>
-        <h1>Here is content</h1>
-    </div>
+  <div>
+    <b-jumbotron>
+      <template>Question: {{ cQuestion.question }}</template>
+
+      <hr class="my-4" />
+
+      <b-list-group>
+        <b-list-group-item
+          v-for="(answersList, i) in answersMethod"
+          :key="i"
+          @click="changeIndex(i)"
+        >
+          {{ answersList }}
+        </b-list-group-item>
+      </b-list-group>
+
+      <b-button variant="primary" href="#">Submit</b-button>
+      <b-button variant="success" href="#" @click="next">Next</b-button>
+    </b-jumbotron>
+  </div>
 </template>
+<script>
+export default {
+  props: {
+    cQuestion: Object,
+    next: Function,
+  },
+  data() {
+    return {
+      cIndex: null,
+    };
+  },
+  methods: {
+    changeIndex(i) {
+      this.cIndex = i;
+      console.log(i);
+    },
+  },
+  computed: {
+    answersMethod() {
+      let answers = [...this.cQuestion.incorrect_answers];
+      answers.push(this.cQuestion.correct_answer);
+      return answers;
+    },
+  },
+};
+</script>
+
+<style scoped>
+.list-group-item:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+.btn {
+  margin: 10px 2px;
+}
+</style>
