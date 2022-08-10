@@ -10,13 +10,17 @@
           v-for="(answersList, i) in shuffledAnswes"
           :key="i"
           @click="changeIndex(i)"
-          :class="[cIndex === i ? 'selected' : '']"
+          :class="correctFun(i)"
         >
           {{ answersList }}
         </b-list-group-item>
       </b-list-group>
 
-      <b-button variant="primary" href="#" @click="submitAnswer"
+      <b-button
+        variant="primary"
+        href="#"
+        @click="submitAnswer"
+        :disabled="cIndex === null || answered"
         >Submit</b-button
       >
       <b-button variant="success" href="#" @click="next">Next</b-button>
@@ -29,20 +33,25 @@ export default {
   props: {
     cQuestion: Object,
     next: Function,
+    increment: Function,
   },
   data() {
     return {
       cIndex: null,
       shuffledAnswes: [],
       correctAnswer: null,
+      answered: false,
     };
   },
   watch: {
     cQuestion: {
+      // Runs watch method in initial start
       immediate: true,
       handler() {
         this.cIndex = null;
         this.shuffleAnswers();
+        this.answered = null;
+        this.correctAnswer = null;
       },
     },
   },
@@ -62,7 +71,29 @@ export default {
         this.cQuestion.correct_answer
       );
     },
-    submitAnswer() {},
+    submitAnswer() {
+      let is_correct = false;
+      if (this.cIndex == this.correctAnswer) {
+        is_correct = true;
+      }
+      this.answered = true;
+      this.increment(is_correct);
+    },
+    correctFun(index) {
+      let answerClass = "";
+      if (!this.answered && this.cIndex === index) {
+        answerClass = "selected";
+      } else if (this.answered && index === this.correctAnswer) {
+        answerClass = "correct";
+      } else if (
+        this.answered &&
+        index === this.cIndex &&
+        index !== this.correctAnswer
+      ) {
+        answerClass = "incorrect";
+      }
+      return answerClass;
+    },
   },
   computed: {
     answersMethod() {
