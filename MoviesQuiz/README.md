@@ -1,4 +1,4 @@
-# school
+# vue-cli
 
 ## Project setup
 ```
